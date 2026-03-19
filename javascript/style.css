@@ -1,0 +1,178 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #4a4a8a;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.score-board {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  background: #f0f0fa;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.score-item {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a4a8a;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.choice-btn {
+  background: none;
+  border: 3px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 3rem;
+  transition: all 0.2s ease;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.choice-btn:hover {
+  border-color: #667eea;
+  background: #f0f0fa;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.choice-btn:active {
+  transform: translateY(0);
+}
+
+.choice-btn span {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.battle-area {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+  min-height: 120px;
+}
+
+.hand-display {
+  text-align: center;
+}
+
+.hand-label {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.hand-emoji {
+  font-size: 4rem;
+  display: block;
+  min-height: 60px;
+}
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.result {
+  font-size: 1.8rem;
+  font-weight: bold;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.result.win {
+  color: #2ecc71;
+  background: #eafaf1;
+}
+
+.result.lose {
+  color: #e74c3c;
+  background: #fdf0ee;
+}
+
+.result.draw {
+  color: #f39c12;
+  background: #fef9ec;
+}
+
+.reset-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #5563d8;
+}
+
+.instructions {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #aaa;
+}

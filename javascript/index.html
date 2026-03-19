@@ -4,186 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>じゃんけんゲーム</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      max-width: 500px;
-      width: 90%;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #4a4a8a;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #888;
-      margin-bottom: 30px;
-      font-size: 0.9rem;
-    }
-
-    .score-board {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 30px;
-      background: #f0f0fa;
-      border-radius: 12px;
-      padding: 15px;
-    }
-
-    .score-item {
-      text-align: center;
-    }
-
-    .score-label {
-      font-size: 0.8rem;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .score-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #4a4a8a;
-    }
-
-    .choices {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .choice-btn {
-      background: none;
-      border: 3px solid #e0e0e0;
-      border-radius: 16px;
-      padding: 15px;
-      cursor: pointer;
-      font-size: 3rem;
-      transition: all 0.2s ease;
-      width: 100px;
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .choice-btn:hover {
-      border-color: #667eea;
-      background: #f0f0fa;
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-    }
-
-    .choice-btn:active {
-      transform: translateY(0);
-    }
-
-    .choice-btn span {
-      display: block;
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 4px;
-    }
-
-    .battle-area {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-bottom: 20px;
-      min-height: 120px;
-    }
-
-    .hand-display {
-      text-align: center;
-    }
-
-    .hand-label {
-      font-size: 0.8rem;
-      color: #888;
-      margin-bottom: 8px;
-    }
-
-    .hand-emoji {
-      font-size: 4rem;
-      display: block;
-      min-height: 60px;
-    }
-
-    .vs {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ccc;
-    }
-
-    .result {
-      font-size: 1.8rem;
-      font-weight: bold;
-      min-height: 50px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      padding: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .result.win {
-      color: #2ecc71;
-      background: #eafaf1;
-    }
-
-    .result.lose {
-      color: #e74c3c;
-      background: #fdf0ee;
-    }
-
-    .result.draw {
-      color: #f39c12;
-      background: #fef9ec;
-    }
-
-    .reset-btn {
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .reset-btn:hover {
-      background: #5563d8;
-    }
-
-    .instructions {
-      margin-top: 20px;
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -206,15 +27,15 @@
     </div>
 
     <div class="choices">
-      <button class="choice-btn" onclick="play('rock')" title="グー" aria-label="グー（Rock）を選ぶ">
+      <button class="choice-btn" onclick="play('rock')" aria-label="グー">
         ✊
         <span>グー</span>
       </button>
-      <button class="choice-btn" onclick="play('scissors')" title="チョキ" aria-label="チョキ（Scissors）を選ぶ">
+      <button class="choice-btn" onclick="play('scissors')" aria-label="チョキ">
         ✌️
         <span>チョキ</span>
       </button>
-      <button class="choice-btn" onclick="play('paper')" title="パー" aria-label="パー（Paper）を選ぶ">
+      <button class="choice-btn" onclick="play('paper')" aria-label="パー">
         🖐️
         <span>パー</span>
       </button>
@@ -239,70 +60,6 @@
     <p class="instructions">ボタンをクリックして手を選んでください</p>
   </div>
 
-  <script>
-    const HANDS = {
-      rock:     { emoji: '✊', label: 'グー' },
-      scissors: { emoji: '✌️', label: 'チョキ' },
-      paper:    { emoji: '🖐️', label: 'パー' }
-    };
-
-    // rock beats scissors, scissors beats paper, paper beats rock
-    const WINS_AGAINST = {
-      rock: 'scissors',
-      scissors: 'paper',
-      paper: 'rock'
-    };
-
-    let scores = { player: 0, cpu: 0, draw: 0 };
-
-    function getRandomHand() {
-      const keys = Object.keys(HANDS);
-      return keys[Math.floor(Math.random() * keys.length)];
-    }
-
-    function judge(player, cpu) {
-      if (player === cpu) return 'draw';
-      if (WINS_AGAINST[player] === cpu) return 'win';
-      return 'lose';
-    }
-
-    function play(playerChoice) {
-      const cpuChoice = getRandomHand();
-      const outcome = judge(playerChoice, cpuChoice);
-
-      document.getElementById('player-hand').textContent = HANDS[playerChoice].emoji;
-      document.getElementById('cpu-hand').textContent = HANDS[cpuChoice].emoji;
-
-      const resultEl = document.getElementById('result');
-      resultEl.className = 'result ' + outcome;
-
-      if (outcome === 'win') {
-        scores.player++;
-        resultEl.textContent = `あなたの勝ち！ 🎉 ${HANDS[playerChoice].label} が ${HANDS[cpuChoice].label} に勝ちました`;
-      } else if (outcome === 'lose') {
-        scores.cpu++;
-        resultEl.textContent = `あなたの負け… 😢 ${HANDS[cpuChoice].label} が ${HANDS[playerChoice].label} に勝ちました`;
-      } else {
-        scores.draw++;
-        resultEl.textContent = `引き分け！ 🤝 お互い ${HANDS[playerChoice].label}`;
-      }
-
-      document.getElementById('player-score').textContent = scores.player;
-      document.getElementById('cpu-score').textContent = scores.cpu;
-      document.getElementById('draw-score').textContent = scores.draw;
-    }
-
-    function resetScore() {
-      scores = { player: 0, cpu: 0, draw: 0 };
-      document.getElementById('player-score').textContent = 0;
-      document.getElementById('cpu-score').textContent = 0;
-      document.getElementById('draw-score').textContent = 0;
-      document.getElementById('player-hand').textContent = '❓';
-      document.getElementById('cpu-hand').textContent = '❓';
-      const resultEl = document.getElementById('result');
-      resultEl.className = 'result';
-      resultEl.textContent = '手を選んでください';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
