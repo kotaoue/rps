@@ -1,7 +1,7 @@
 const HANDS = {
-  rock:     { emoji: '✊', label: 'グー' },
-  scissors: { emoji: '✌️', label: 'チョキ' },
-  paper:    { emoji: '🖐️', label: 'パー' }
+  rock:     { emoji: '✊', label: 'Rock' },
+  scissors: { emoji: '✌️', label: 'Scissors' },
+  paper:    { emoji: '🖐️', label: 'Paper' }
 };
 
 // rock beats scissors, scissors beats paper, paper beats rock
@@ -36,13 +36,13 @@ function play(playerChoice) {
 
   if (outcome === 'win') {
     scores.player++;
-    resultEl.textContent = `あなたの勝ち！ 🎉 ${HANDS[playerChoice].label} が ${HANDS[cpuChoice].label} に勝ちました`;
+    resultEl.textContent = `You win! 🎉 ${HANDS[playerChoice].label} beats ${HANDS[cpuChoice].label}`;
   } else if (outcome === 'lose') {
     scores.cpu++;
-    resultEl.textContent = `あなたの負け… 😢 ${HANDS[cpuChoice].label} が ${HANDS[playerChoice].label} に勝ちました`;
+    resultEl.textContent = `You lose… 😢 ${HANDS[cpuChoice].label} beats ${HANDS[playerChoice].label}`;
   } else {
     scores.draw++;
-    resultEl.textContent = `引き分け！ 🤝 お互い ${HANDS[playerChoice].label}`;
+    resultEl.textContent = `Draw! 🤝 Both chose ${HANDS[playerChoice].label}`;
   }
 
   document.getElementById('player-score').textContent = scores.player;
@@ -59,5 +59,5 @@ function resetScore() {
   document.getElementById('cpu-hand').textContent = '❓';
   const resultEl = document.getElementById('result');
   resultEl.className = 'result';
-  resultEl.textContent = '手を選んでください';
+  resultEl.textContent = 'Choose your hand';
 }
