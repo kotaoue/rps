@@ -1,63 +1,66 @@
-const HANDS = {
-  rock:     { emoji: '✊', label: 'Rock' },
+const CHOICES = {
+  rock: { emoji: '✊', label: 'Rock' },
   scissors: { emoji: '✌️', label: 'Scissors' },
-  paper:    { emoji: '🖐️', label: 'Paper' }
+  paper: { emoji: '🖐️', label: 'Paper' },
 };
 
-// rock beats scissors, scissors beats paper, paper beats rock
-const WINS_AGAINST = {
+const BEATS = {
   rock: 'scissors',
   scissors: 'paper',
-  paper: 'rock'
+  paper: 'rock',
 };
 
-let scores = { player: 0, cpu: 0, draw: 0 };
+let wins = 0, draws = 0, losses = 0;
 
-function getRandomHand() {
-  const keys = Object.keys(HANDS);
-  return keys[Math.floor(Math.random() * keys.length)];
+function getComputerChoice() {
+  const options = ['rock', 'scissors', 'paper'];
+  return options[Math.floor(Math.random() * options.length)];
 }
 
-function judge(player, cpu) {
-  if (player === cpu) return 'draw';
-  if (WINS_AGAINST[player] === cpu) return 'win';
+function getResult(player, computer) {
+  if (player === computer) return 'draw';
+  if (BEATS[player] === computer) return 'win';
   return 'lose';
 }
 
 function play(playerChoice) {
-  const cpuChoice = getRandomHand();
-  const outcome = judge(playerChoice, cpuChoice);
+  const computerChoice = getComputerChoice();
+  const result = getResult(playerChoice, computerChoice);
 
-  document.getElementById('player-hand').textContent = HANDS[playerChoice].emoji;
-  document.getElementById('cpu-hand').textContent = HANDS[cpuChoice].emoji;
+  if (result === 'win') wins++;
+  else if (result === 'draw') draws++;
+  else losses++;
 
-  const resultEl = document.getElementById('result');
-  resultEl.className = 'result ' + outcome;
+  updateScore();
+  updateBattleArea(playerChoice, computerChoice, result);
+}
 
-  if (outcome === 'win') {
-    scores.player++;
-    resultEl.textContent = `You win! 🎉 ${HANDS[playerChoice].label} beats ${HANDS[cpuChoice].label}`;
-  } else if (outcome === 'lose') {
-    scores.cpu++;
-    resultEl.textContent = `You lose… 😢 ${HANDS[cpuChoice].label} beats ${HANDS[playerChoice].label}`;
-  } else {
-    scores.draw++;
-    resultEl.textContent = `Draw! 🤝 Both chose ${HANDS[playerChoice].label}`;
-  }
+function updateScore() {
+  document.getElementById('win-count').textContent = wins;
+  document.getElementById('draw-count').textContent = draws;
+  document.getElementById('lose-count').textContent = losses;
+}
 
-  document.getElementById('player-score').textContent = scores.player;
-  document.getElementById('cpu-score').textContent = scores.cpu;
-  document.getElementById('draw-score').textContent = scores.draw;
+function updateBattleArea(player, computer, result) {
+  const resultMessages = {
+    win: '🎉 You Win!',
+    draw: '🤝 Draw!',
+    lose: '😢 You Lose!',
+  };
+
+  const area = document.getElementById('battle-area');
+  area.innerHTML = `
+    <div class="battle-hands">
+      <span title="${CHOICES[player].label}">${CHOICES[player].emoji}</span>
+      <span class="battle-vs">VS</span>
+      <span title="${CHOICES[computer].label}">${CHOICES[computer].emoji}</span>
+    </div>
+    <div class="result-text ${result}">${resultMessages[result]}</div>
+  `;
 }
 
 function resetScore() {
-  scores = { player: 0, cpu: 0, draw: 0 };
-  document.getElementById('player-score').textContent = 0;
-  document.getElementById('cpu-score').textContent = 0;
-  document.getElementById('draw-score').textContent = 0;
-  document.getElementById('player-hand').textContent = '❓';
-  document.getElementById('cpu-hand').textContent = '❓';
-  const resultEl = document.getElementById('result');
-  resultEl.className = 'result';
-  resultEl.textContent = 'Choose your hand';
+  wins = 0; draws = 0; losses = 0;
+  updateScore();
+  document.getElementById('battle-area').innerHTML = '<p class="waiting-text">Choose your move!</p>';
 }

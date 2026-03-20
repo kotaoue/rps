@@ -1,63 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rock Paper Scissors</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>✊ Rock Paper Scissors</h1>
-    <p class="subtitle">Choose your hand!</p>
 
     <div class="score-board">
       <div class="score-item">
-        <div class="score-label">You</div>
-        <div class="score-value" id="player-score">0</div>
+        <div class="score-label">Win</div>
+        <div class="score-value win" id="win-count">0</div>
       </div>
       <div class="score-item">
         <div class="score-label">Draw</div>
-        <div class="score-value" id="draw-score">0</div>
+        <div class="score-value draw" id="draw-count">0</div>
       </div>
       <div class="score-item">
-        <div class="score-label">CPU</div>
-        <div class="score-value" id="cpu-score">0</div>
+        <div class="score-label">Lose</div>
+        <div class="score-value lose" id="lose-count">0</div>
       </div>
     </div>
 
     <div class="choices">
       <button class="choice-btn" onclick="play('rock')" aria-label="Rock">
         ✊
-        <span>Rock</span>
-      </button>
-      <button class="choice-btn" onclick="play('scissors')" aria-label="Scissors">
-        ✌️
-        <span>Scissors</span>
+        <span class="label">Rock</span>
       </button>
       <button class="choice-btn" onclick="play('paper')" aria-label="Paper">
         🖐️
-        <span>Paper</span>
+        <span class="label">Paper</span>
+      </button>
+      <button class="choice-btn" onclick="play('scissors')" aria-label="Scissors">
+        ✌️
+        <span class="label">Scissors</span>
       </button>
     </div>
 
-    <div class="battle-area">
-      <div class="hand-display">
-        <div class="hand-label">You</div>
-        <span class="hand-emoji" id="player-hand">❓</span>
-      </div>
-      <div class="vs">VS</div>
-      <div class="hand-display">
-        <div class="hand-label">CPU</div>
-        <span class="hand-emoji" id="cpu-hand">❓</span>
-      </div>
+    <div class="battle-area" id="battle-area">
+      <p class="waiting-text">Choose your move!</p>
     </div>
 
-    <div class="result" id="result">Choose your hand</div>
-
     <button class="reset-btn" onclick="resetScore()">Reset Score</button>
-
-    <p class="instructions">Click a button to choose your hand</p>
   </div>
 
   <script src="script.js"></script>
