@@ -1,4 +1,5 @@
 # rps
+
 Rock Paper Scissors
 
 ## Description
@@ -7,4 +8,4 @@ This repository is for creating rock-paper-scissors games to understand various 
 
 ## Demo
 
-https://rps-gamma-ten.vercel.app/
+- [rps@vercel](https://rps-gamma-ten.vercel.app/)
