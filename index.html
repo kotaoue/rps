@@ -1,120 +1,55 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>じゃんけん (Rock Paper Scissors)</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Rock Paper Scissors</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    h1 { font-size: 2rem; color: #333; margin-bottom: 8px; }
+    p { color: #666; margin-bottom: 30px; font-size: 0.95rem; }
+    .links { display: flex; flex-direction: column; gap: 12px; }
+    .link-btn {
+      display: block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 1rem;
+      transition: opacity 0.2s ease;
+    }
+    .link-btn:hover { opacity: 0.85; }
+    .link-btn .desc { font-size: 0.8rem; opacity: 0.85; }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>✊ じゃんけん</h1>
-    <p class="subtitle">Rock Paper Scissors</p>
-
-    <div class="score-board">
-      <div class="score-item">
-        <div class="score-label">Win</div>
-        <div class="score-value win" id="win-count">0</div>
-      </div>
-      <div class="score-item">
-        <div class="score-label">Draw</div>
-        <div class="score-value draw" id="draw-count">0</div>
-      </div>
-      <div class="score-item">
-        <div class="score-label">Lose</div>
-        <div class="score-value lose" id="lose-count">0</div>
-      </div>
+    <h1>✊ Rock Paper Scissors</h1>
+    <p>Choose an implementation to play:</p>
+    <div class="links">
+      <a class="link-btn" href="/javascript/">
+        JavaScript
+        <div class="desc">Vanilla JS · No dependencies</div>
+      </a>
     </div>
-
-    <div class="choices">
-      <button class="choice-btn" onclick="play('rock')" aria-label="Rock">
-        ✊
-        <span class="label">Rock</span>
-      </button>
-      <button class="choice-btn" onclick="play('paper')" aria-label="Paper">
-        🖐️
-        <span class="label">Paper</span>
-      </button>
-      <button class="choice-btn" onclick="play('scissors')" aria-label="Scissors">
-        ✌️
-        <span class="label">Scissors</span>
-      </button>
-    </div>
-
-    <div class="battle-area" id="battle-area">
-      <p class="waiting-text">Choose your move!</p>
-    </div>
-
-    <button class="reset-btn" onclick="resetScore()">Reset Score</button>
   </div>
-
-  <script>
-    const CHOICES = {
-      rock: { emoji: '✊', label: 'Rock' },
-      scissors: { emoji: '✌️', label: 'Scissors' },
-      paper: { emoji: '🖐️', label: 'Paper' },
-    };
-
-    const BEATS = {
-      rock: 'scissors',
-      scissors: 'paper',
-      paper: 'rock',
-    };
-
-    let wins = 0, draws = 0, losses = 0;
-
-    function getComputerChoice() {
-      const options = ['rock', 'scissors', 'paper'];
-      return options[Math.floor(Math.random() * options.length)];
-    }
-
-    function getResult(player, computer) {
-      if (player === computer) return 'draw';
-      if (BEATS[player] === computer) return 'win';
-      return 'lose';
-    }
-
-    function play(playerChoice) {
-      const computerChoice = getComputerChoice();
-      const result = getResult(playerChoice, computerChoice);
-
-      if (result === 'win') wins++;
-      else if (result === 'draw') draws++;
-      else losses++;
-
-      updateScore();
-      updateBattleArea(playerChoice, computerChoice, result);
-    }
-
-    function updateScore() {
-      document.getElementById('win-count').textContent = wins;
-      document.getElementById('draw-count').textContent = draws;
-      document.getElementById('lose-count').textContent = losses;
-    }
-
-    function updateBattleArea(player, computer, result) {
-      const resultMessages = {
-        win: '🎉 You Win!',
-        draw: '🤝 Draw!',
-        lose: '😢 You Lose!',
-      };
-
-      const area = document.getElementById('battle-area');
-      area.innerHTML = `
-        <div class="battle-hands">
-          <span title="${CHOICES[player].label}">${CHOICES[player].emoji}</span>
-          <span class="battle-vs">VS</span>
-          <span title="${CHOICES[computer].label}">${CHOICES[computer].emoji}</span>
-        </div>
-        <div class="result-text ${result}">${resultMessages[result]}</div>
-      `;
-    }
-
-    function resetScore() {
-      wins = 0; draws = 0; losses = 0;
-      updateScore();
-      document.getElementById('battle-area').innerHTML = '<p class="waiting-text">Choose your move!</p>';
-    }
-  </script>
 </body>
 </html>
