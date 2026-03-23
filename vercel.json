@@ -1,3 +1,7 @@
 {
-  "version": 2
+  "version": 2,
+  "rewrites": [
+    { "source": "/php",  "destination": "/api/php" },
+    { "source": "/php/", "destination": "/api/php" }
+  ]
 }
