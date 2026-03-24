@@ -12,6 +12,7 @@ This repository is for creating rock-paper-scissors games to understand various 
 |---|---|---|
 | JavaScript (Vanilla) | [javascript](./javascript) | ✅ Static |
 | Node.js | [node](./node) | ✅ Serverless (`/api`) |
+| Go | [go](./go) | ✅ Serverless (`/api`) |
 
 ## Languages / Frameworks implementable on Vercel
 

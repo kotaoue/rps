@@ -1,0 +1,20 @@
+FROM golang:alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY main.go ./
+RUN go build -o rps .
+
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/rps ./
+COPY style.css ./
+
+EXPOSE 8080
+
+CMD ["./rps"]
