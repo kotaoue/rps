@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"rps/internal/rps"
+	"rps/pkg/rps"
 )
 
 // Handler is the Vercel serverless function entry point.

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"rps/internal/rps"
+	"rps/pkg/rps"
 )
 
 func main() {
