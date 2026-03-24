@@ -1,5 +1,11 @@
 'use strict';
 
+const http = require('http');
+const fs   = require('fs');
+const path = require('path');
+
+const PORT = process.env.PORT || 8080;
+
 const choices = {
   rock:     { emoji: '✊', label: 'Rock' },
   paper:    { emoji: '🖐️', label: 'Paper' },
@@ -40,7 +46,14 @@ function parseCookies(cookieHeader) {
   return cookies;
 }
 
-module.exports = async (req, res) => {
+const server = http.createServer(async (req, res) => {
+  if (req.url === '/style.css') {
+    const css = fs.readFileSync(path.join(__dirname, 'style.css'));
+    res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
+    res.end(css);
+    return;
+  }
+
   const cookies = parseCookies(req.headers.cookie);
   let session = { wins: 0, draws: 0, losses: 0 };
 
@@ -72,7 +85,7 @@ module.exports = async (req, res) => {
 
     if (params.has('reset')) {
       session = { wins: 0, draws: 0, losses: 0 };
-    } else if (params.has('choice') && choices.hasOwnProperty(params.get('choice'))) {
+    } else if (params.has('choice') && Object.prototype.hasOwnProperty.call(choices, params.get('choice'))) {
       playerChoice   = params.get('choice');
       const keys     = Object.keys(choices);
       computerChoice = keys[Math.floor(Math.random() * keys.length)];
@@ -91,8 +104,6 @@ module.exports = async (req, res) => {
   }
 
   const sessionCookie = Buffer.from(JSON.stringify(session)).toString('base64');
-  res.setHeader('Set-Cookie', `rps_session=${sessionCookie}; Path=/; HttpOnly; SameSite=Lax`);
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
   const battleAreaContent = playerChoice
     ? `<div class="battle-hands">
@@ -116,7 +127,7 @@ module.exports = async (req, res) => {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rock Paper Scissors</title>
-  <link rel="stylesheet" href="/php/style.css" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div class="container">
@@ -152,5 +163,13 @@ module.exports = async (req, res) => {
 </body>
 </html>`;
 
-  res.status(200).send(html);
-};
+  res.writeHead(200, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Set-Cookie': `rps_session=${sessionCookie}; Path=/; HttpOnly; SameSite=Lax`,
+  });
+  res.end(html);
+});
+
+server.listen(PORT, () => {
+  console.log(`Node RPS server running on http://localhost:${PORT}`);
+});
