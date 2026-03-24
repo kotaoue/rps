@@ -5,15 +5,16 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 
-COPY main.go ./
-RUN go build -o rps .
+COPY internal/ ./internal/
+COPY go/ ./go/
+RUN go build -o rps ./go/
 
 FROM alpine:latest
 
 WORKDIR /app
 
 COPY --from=builder /app/rps ./
-COPY style.css ./
+COPY go/style.css ./
 
 EXPOSE 8080
 
