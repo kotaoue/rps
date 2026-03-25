@@ -14,7 +14,7 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY --from=builder /app/rps ./
-COPY go/style.css ./
+COPY style.css ./
 
 EXPOSE 8080
 

@@ -1,9 +1,9 @@
 FROM nginx:alpine
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY style.css  /usr/share/nginx/html/style.css
-COPY script.js  /usr/share/nginx/html/script.js
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY javascript/index.html /usr/share/nginx/html/index.html
+COPY style.css             /usr/share/nginx/html/style.css
+COPY javascript/script.js  /usr/share/nginx/html/script.js
+COPY javascript/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
 

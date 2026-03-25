@@ -2,8 +2,8 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY server.js /app/server.js
-COPY style.css /app/style.css
+COPY node/server.js /app/server.js
+COPY style.css /style.css
 
 EXPOSE 8080
 
