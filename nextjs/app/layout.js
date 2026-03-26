@@ -1,4 +1,4 @@
-import './globals.css';
+import '../../style.css';
 
 export const metadata = {
   title: 'Rock Paper Scissors',
