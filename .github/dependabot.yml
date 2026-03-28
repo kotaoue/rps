@@ -1,3 +1,4 @@
+# .github/dependabot.yml
 version: 2
 updates:
   # Automatically update GitHub Actions
@@ -16,7 +17,7 @@ updates:
     assignees:
       - kotaoue
 
-  # Automatically update npm packages (Next.js)
+  # Automatically update Next.js npm dependencies
   - package-ecosystem: npm
     directory: /nextjs
     schedule:

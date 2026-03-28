@@ -1,28 +1,76 @@
 # rps
 
-Rock Paper Scissors
-
-## Description
-
-This repository is for creating rock-paper-scissors games to understand various languages and frameworks.
-
-## Implementations
-
-| Language / Framework | Directory | Vercel |
-|---|---|---|
-| JavaScript (Vanilla) | [javascript](./javascript) | ✅ Static |
-| Node.js | [node](./node) | ✅ Serverless (`/api`) |
-| Go | [go](./go) | ✅ Serverless (`/api`) |
-
-## Languages / Frameworks implementable on Vercel
-
-Vercel supports the following runtimes for Serverless Functions, in addition to static frontends.
-
-| Category | Language / Framework |
-|---|---|
-| Serverless Runtime | Node.js, Python, Go, Ruby |
-| Static Frontend | HTML/CSS/JS, React, Vue, Svelte, Next.js, Nuxt.js, SvelteKit |
+A Rock Paper Scissors game implemented in multiple languages and frameworks, exploring how the same game logic can be built across different technology stacks.
 
 ## Demo
 
-- [rps@vercel](https://rps-gamma-ten.vercel.app/)
+▶️ [Play on Vercel](https://rps-gamma-ten.vercel.app/)
+
+## Implementations
+
+| Language / Framework | Directory | Deployment |
+|---|---|---|
+| JavaScript (Vanilla) | [javascript](./javascript) | Static |
+| Node.js | [node](./node) | Serverless (`/api/node`) |
+| Go | [go](./go) | Serverless (`/api/go`) |
+| Next.js | [nextjs](./nextjs) | Serverless |
+
+## Project Structure
+
+```
+rps/
+├── api/            # Vercel serverless function entrypoints
+│   ├── go.go       # Go handler
+│   └── node.js     # Node.js handler
+├── go/             # Standalone Go HTTP server
+├── javascript/     # Vanilla JS static frontend
+├── nextjs/         # Next.js implementation
+├── node/           # Standalone Node.js HTTP server
+├── pkg/rps/        # Shared Go game logic package
+├── index.html      # Root landing page
+├── style.css       # Shared stylesheet
+└── vercel.json     # Vercel deployment configuration
+```
+
+## Getting Started
+
+### Go
+
+```bash
+go run ./go
+# Server running at http://localhost:8080
+```
+
+### Node.js
+
+```bash
+node node/server.js
+# Server running at http://localhost:8080
+```
+
+### Next.js
+
+```bash
+cd nextjs
+npm install
+npm run dev
+# Server running at http://localhost:3000
+```
+
+### Docker
+
+Each implementation includes a `Dockerfile`:
+
+```bash
+# Go
+docker build -f go/Dockerfile -t rps-go .
+docker run -p 8080:8080 rps-go
+
+# Node.js
+docker build -f node/Dockerfile -t rps-node .
+docker run -p 8080:8080 rps-node
+
+# Next.js
+docker build -f nextjs/Dockerfile -t rps-nextjs .
+docker run -p 3000:3000 rps-nextjs
+```
