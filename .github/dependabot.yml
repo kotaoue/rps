@@ -1,0 +1,26 @@
+# .github/dependabot.yml
+version: 2
+updates:
+  # Automatically update GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    assignees:
+      - kotaoue
+
+  # Automatically update Go modules
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+    assignees:
+      - kotaoue
+
+  # Automatically update Next.js npm dependencies
+  - package-ecosystem: npm
+    directory: /nextjs
+    schedule:
+      interval: weekly
+    assignees:
+      - kotaoue
