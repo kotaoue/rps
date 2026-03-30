@@ -14,6 +14,7 @@ A Rock Paper Scissors game implemented in multiple languages and frameworks, exp
 | Node.js | [node](./node) | Serverless (`/api/node`) |
 | Go | [go](./go) | Serverless (`/api/go`) |
 | Next.js | [nextjs](./nextjs) | Serverless |
+| TypeScript | [typescript](./typescript) | Standalone server |
 
 ## Project Structure
 
@@ -26,6 +27,7 @@ rps/
 ├── javascript/     # Vanilla JS static frontend
 ├── nextjs/         # Next.js implementation
 ├── node/           # Standalone Node.js HTTP server
+├── typescript/     # Standalone TypeScript HTTP server
 ├── pkg/rps/        # Shared Go game logic package
 ├── index.html      # Root landing page
 ├── style.css       # Shared stylesheet
@@ -45,6 +47,16 @@ go run ./go
 
 ```bash
 node node/server.js
+# Server running at http://localhost:8080
+```
+
+### TypeScript
+
+```bash
+cd typescript
+npm install
+npm run build
+npm start
 # Server running at http://localhost:8080
 ```
 
@@ -69,6 +81,10 @@ docker run -p 8080:8080 rps-go
 # Node.js
 docker build -f node/Dockerfile -t rps-node .
 docker run -p 8080:8080 rps-node
+
+# TypeScript
+docker build -f typescript/Dockerfile -t rps-typescript .
+docker run -p 8080:8080 rps-typescript
 
 # Next.js
 docker build -f nextjs/Dockerfile -t rps-nextjs .
