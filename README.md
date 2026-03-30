@@ -14,7 +14,7 @@ A Rock Paper Scissors game implemented in multiple languages and frameworks, exp
 | Node.js | [node](./node) | Serverless (`/api/node`) |
 | Go | [go](./go) | Serverless (`/api/go`) |
 | Next.js | [nextjs](./nextjs) | Serverless |
-| TypeScript | [typescript](./typescript) | Standalone server |
+| TypeScript | [typescript](./typescript) | Serverless (`/typescript`) |
 
 ## Project Structure
 
