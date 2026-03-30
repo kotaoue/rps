@@ -1,9 +1,11 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/node",  "destination": "/api/node" },
-    { "source": "/node/", "destination": "/api/node" },
-    { "source": "/go",   "destination": "/api/go" },
-    { "source": "/go/",  "destination": "/api/go" }
+    { "source": "/node",       "destination": "/api/node" },
+    { "source": "/node/",      "destination": "/api/node" },
+    { "source": "/go",         "destination": "/api/go" },
+    { "source": "/go/",        "destination": "/api/go" },
+    { "source": "/typescript", "destination": "/api/typescript" },
+    { "source": "/typescript/", "destination": "/api/typescript" }
   ]
 }
