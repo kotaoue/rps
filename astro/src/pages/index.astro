@@ -1,0 +1,144 @@
+---
+import '../../../style.css';
+
+const CHOICES = {
+  rock:     { emoji: '✊', label: 'Rock' },
+  paper:    { emoji: '🖐️', label: 'Paper' },
+  scissors: { emoji: '✌️', label: 'Scissors' },
+};
+
+const BEATS = {
+  rock:     'scissors',
+  scissors: 'paper',
+  paper:    'rock',
+};
+
+const RESULT_MESSAGES = {
+  win:  '🎉 You Win!',
+  draw: '🤝 Draw!',
+  lose: '😢 You Lose!',
+};
+
+function getSession(cookies) {
+  try {
+    const raw = cookies.get('rps_session')?.value;
+    if (raw) {
+      const parsed = JSON.parse(Buffer.from(raw, 'base64').toString('utf8'));
+      return {
+        wins:   Math.max(0, parseInt(parsed.wins,   10) || 0),
+        draws:  Math.max(0, parseInt(parsed.draws,  10) || 0),
+        losses: Math.max(0, parseInt(parsed.losses, 10) || 0),
+      };
+    }
+  } catch {}
+  return { wins: 0, draws: 0, losses: 0 };
+}
+
+function saveSession(cookies, session) {
+  const value = Buffer.from(JSON.stringify(session)).toString('base64');
+  cookies.set('rps_session', value, { path: '/', httpOnly: true, sameSite: 'lax' });
+}
+
+if (Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData();
+  const action = formData.get('action');
+
+  if (action === 'reset') {
+    saveSession(Astro.cookies, { wins: 0, draws: 0, losses: 0 });
+    return Astro.redirect('/');
+  }
+
+  const choice = formData.get('choice');
+  if (choice && Object.prototype.hasOwnProperty.call(CHOICES, choice)) {
+    const session = getSession(Astro.cookies);
+    const playerChoice = choice;
+    const keys = Object.keys(CHOICES);
+    const computerChoice = keys[Math.floor(Math.random() * keys.length)];
+
+    let result;
+    if (playerChoice === computerChoice) {
+      result = 'draw';
+      session.draws++;
+    } else if (BEATS[playerChoice] === computerChoice) {
+      result = 'win';
+      session.wins++;
+    } else {
+      result = 'lose';
+      session.losses++;
+    }
+
+    saveSession(Astro.cookies, session);
+    return Astro.redirect(`/?player=${playerChoice}&computer=${computerChoice}&result=${result}`);
+  }
+
+  return Astro.redirect('/');
+}
+
+const session = getSession(Astro.cookies);
+const player   = Astro.url.searchParams.get('player')   ?? '';
+const computer = Astro.url.searchParams.get('computer') ?? '';
+const result   = Astro.url.searchParams.get('result')   ?? '';
+
+const validResult =
+  result   && ['win', 'draw', 'lose'].includes(result) &&
+  player   && Object.prototype.hasOwnProperty.call(CHOICES, player) &&
+  computer && Object.prototype.hasOwnProperty.call(CHOICES, computer);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors</title>
+</head>
+<body>
+  <div class="container">
+    <h1>✊ Rock Paper Scissors</h1>
+
+    <div class="score-board">
+      <div class="score-item">
+        <div class="score-label">Win</div>
+        <div class="score-value win">{session.wins}</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">Draw</div>
+        <div class="score-value draw">{session.draws}</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">Lose</div>
+        <div class="score-value lose">{session.losses}</div>
+      </div>
+    </div>
+
+    <form method="POST" class="choices">
+      {Object.entries(CHOICES).map(([key, choice]) => (
+        <button type="submit" name="choice" value={key} class="choice-btn" aria-label={choice.label}>
+          {choice.emoji}
+          <span class="label">{choice.label}</span>
+        </button>
+      ))}
+    </form>
+
+    <div class="battle-area">
+      {validResult ? (
+        <>
+          <div class="battle-hands">
+            <span title={CHOICES[player].label}>{CHOICES[player].emoji}</span>
+            <span class="battle-vs">VS</span>
+            <span title={CHOICES[computer].label}>{CHOICES[computer].emoji}</span>
+          </div>
+          <div class={`result-text ${result}`}>{RESULT_MESSAGES[result]}</div>
+        </>
+      ) : (
+        <p class="waiting-text">Choose your move!</p>
+      )}
+    </div>
+
+    <form method="POST">
+      <input type="hidden" name="action" value="reset" />
+      <button type="submit" class="reset-btn">Reset Score</button>
+    </form>
+  </div>
+</body>
+</html>
