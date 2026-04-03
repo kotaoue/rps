@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "nextjs/package.json", "use": "@vercel/next" },
+    { "src": "astro/package.json", "use": "@vercel/static-build", "config": { "distDir": ".vercel/output" } }
+  ],
   "rewrites": [
     { "source": "/node",       "destination": "/api/node" },
     { "source": "/node/",      "destination": "/api/node" },

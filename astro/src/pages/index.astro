@@ -45,7 +45,7 @@ if (Astro.request.method === 'POST') {
 
   if (action === 'reset') {
     saveSession(Astro.cookies, { wins: 0, draws: 0, losses: 0 });
-    return Astro.redirect('/');
+    return Astro.redirect(import.meta.env.BASE_URL);
   }
 
   const choice = formData.get('choice');
@@ -68,10 +68,10 @@ if (Astro.request.method === 'POST') {
     }
 
     saveSession(Astro.cookies, session);
-    return Astro.redirect(`/?player=${playerChoice}&computer=${computerChoice}&result=${result}`);
+    return Astro.redirect(`${import.meta.env.BASE_URL}?player=${playerChoice}&computer=${computerChoice}&result=${result}`);
   }
 
-  return Astro.redirect('/');
+  return Astro.redirect(import.meta.env.BASE_URL);
 }
 
 const session = getSession(Astro.cookies);

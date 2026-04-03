@@ -1,5 +1,3 @@
-import '../../style.css';
-
 export const metadata = {
   title: 'Rock Paper Scissors',
 };
@@ -7,6 +5,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/style.css" />
+      </head>
       <body>{children}</body>
     </html>
   );
