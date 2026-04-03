@@ -15,6 +15,7 @@ A Rock Paper Scissors game implemented in multiple languages and frameworks, exp
 | Go | [go](./go) | Serverless (`/api/go`) |
 | Next.js | [nextjs](./nextjs) | Serverless |
 | TypeScript | [typescript](./typescript) | Serverless (`/typescript`) |
+| Astro | [astro](./astro) | SSR |
 
 ## Project Structure
 
@@ -23,6 +24,7 @@ rps/
 ├── api/            # Vercel serverless function entrypoints
 │   ├── go.go       # Go handler
 │   └── node.js     # Node.js handler
+├── astro/          # Astro SSR implementation
 ├── go/             # Standalone Go HTTP server
 ├── javascript/     # Vanilla JS static frontend
 ├── nextjs/         # Next.js implementation
@@ -69,6 +71,15 @@ npm run dev
 # Server running at http://localhost:3000
 ```
 
+### Astro
+
+```bash
+cd astro
+npm install
+npm run dev
+# Server running at http://localhost:4321
+```
+
 ### Docker
 
 Each implementation includes a `Dockerfile`:
@@ -89,4 +100,8 @@ docker run -p 8080:8080 rps-typescript
 # Next.js
 docker build -f nextjs/Dockerfile -t rps-nextjs .
 docker run -p 3000:3000 rps-nextjs
+
+# Astro
+docker build -f astro/Dockerfile -t rps-astro .
+docker run -p 4321:4321 rps-astro
 ```

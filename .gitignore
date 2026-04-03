@@ -3,3 +3,6 @@ nextjs/.next/
 nextjs/node_modules/
 typescript/node_modules/
 typescript/dist/
+astro/node_modules/
+astro/dist/
+astro/.astro/
