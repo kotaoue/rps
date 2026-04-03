@@ -4,12 +4,10 @@
     { "src": "nextjs/package.json", "use": "@vercel/next" },
     { "src": "astro/package.json", "use": "@vercel/static-build", "config": { "distDir": ".vercel/output" } }
   ],
-  "rewrites": [
-    { "source": "/node",       "destination": "/api/node" },
-    { "source": "/node/",      "destination": "/api/node" },
-    { "source": "/go",         "destination": "/api/go" },
-    { "source": "/go/",        "destination": "/api/go" },
-    { "source": "/typescript", "destination": "/api/typescript" },
-    { "source": "/typescript/", "destination": "/api/typescript" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "^/node/?$", "dest": "/api/node" },
+    { "src": "^/go/?$", "dest": "/api/go" },
+    { "src": "^/typescript/?$", "dest": "/api/typescript" }
   ]
 }
