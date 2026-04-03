@@ -36,20 +36,22 @@ rps/
 └── vercel.json     # Vercel deployment configuration
 ```
 
-## Verifying the Vercel Deployment Locally
+## Verifying the Root Page Locally
 
-You can replicate the full Vercel routing (including the root `index.html` language-selection page) locally using the [Vercel CLI](https://vercel.com/docs/cli):
+The root `index.html` is a plain static file, so you can verify it is present and renders correctly with any static file server:
 
 ```bash
-npm install -g vercel   # install once if not already installed
-vercel dev              # starts local dev server, mirrors vercel.json routing
+# From the repo root — serves index.html at http://localhost:5000
+npx serve .
 ```
 
-Open <http://localhost:3000> — you should see the language/framework selection page.  
-If you see a different page (e.g. the Astro RPS game), the root `index.html` is not being served correctly.
+Open <http://localhost:5000> — you should see the language/framework selection page.
 
-> **Note:** `vercel dev` reads `vercel.json` and honours the `builds` and `routes` sections,
-> so it is the closest local equivalent to what runs in production.
+> **Note:** `vercel dev` currently fails with this project's configuration due to a
+> compatibility issue between the legacy `@vercel/next` builder and Next.js 15
+> (`Error: The first argument must be of type string or an instance of Buffer … Received undefined`).
+> Use a Vercel [Preview Deployment](https://vercel.com/docs/deployments/preview-deployments)
+> to verify the full routing in a production-equivalent environment.
 
 ## Getting Started
 
