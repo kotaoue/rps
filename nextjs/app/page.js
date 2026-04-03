@@ -30,6 +30,7 @@ async function getSession() {
 }
 
 export default async function Home({ searchParams }) {
+  console.log('nextjs: GET /nextjs');
   const session = await getSession();
   const params = await searchParams;
   const { player, computer, result } = params;

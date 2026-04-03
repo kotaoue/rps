@@ -40,6 +40,7 @@ function saveSession(cookies, session) {
 }
 
 if (Astro.request.method === 'POST') {
+  console.log(`astro: ${Astro.request.method} ${Astro.url.pathname}`);
   const formData = await Astro.request.formData();
   const action = formData.get('action');
 
@@ -75,6 +76,7 @@ if (Astro.request.method === 'POST') {
 }
 
 const session = getSession(Astro.cookies);
+console.log(`astro: ${Astro.request.method} ${Astro.url.pathname}`);
 const player   = Astro.url.searchParams.get('player')   ?? '';
 const computer = Astro.url.searchParams.get('computer') ?? '';
 const result   = Astro.url.searchParams.get('result')   ?? '';

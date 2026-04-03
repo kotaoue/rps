@@ -47,6 +47,7 @@ function parseCookies(cookieHeader) {
 }
 
 const server = http.createServer(async (req, res) => {
+  console.log(`node: ${req.method} ${req.url}`);
   if (req.url === '/style.css') {
     const css = fs.readFileSync(path.join(__dirname, '..', 'style.css'));
     res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });

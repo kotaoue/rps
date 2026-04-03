@@ -59,6 +59,7 @@ function isChoiceKey(value: unknown): value is ChoiceKey {
 }
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
+  console.log(`typescript: ${req.method} ${req.url}`);
   const cookies = parseCookies(req.headers.cookie);
   let session: Session = { wins: 0, draws: 0, losses: 0 };
 
