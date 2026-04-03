@@ -1,3 +1,5 @@
+console.log('javascript: ' + location.href);
+
 const CHOICES = {
   rock: { emoji: '✊', label: 'Rock' },
   scissors: { emoji: '✌️', label: 'Scissors' },
