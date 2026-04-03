@@ -41,6 +41,7 @@ function parseCookies(cookieHeader) {
 }
 
 module.exports = async (req, res) => {
+  console.log(`node: ${req.method} ${req.url}`);
   const cookies = parseCookies(req.headers.cookie);
   let session = { wins: 0, draws: 0, losses: 0 };
 
