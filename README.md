@@ -36,6 +36,21 @@ rps/
 └── vercel.json     # Vercel deployment configuration
 ```
 
+## Verifying the Vercel Deployment Locally
+
+You can replicate the full Vercel routing (including the root `index.html` language-selection page) locally using the [Vercel CLI](https://vercel.com/docs/cli):
+
+```bash
+npm install -g vercel   # install once if not already installed
+vercel dev              # starts local dev server, mirrors vercel.json routing
+```
+
+Open <http://localhost:3000> — you should see the language/framework selection page.  
+If you see a different page (e.g. the Astro RPS game), the root `index.html` is not being served correctly.
+
+> **Note:** `vercel dev` reads `vercel.json` and honours the `builds` and `routes` sections,
+> so it is the closest local equivalent to what runs in production.
+
 ## Getting Started
 
 ### Go
