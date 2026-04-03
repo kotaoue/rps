@@ -1,6 +1,9 @@
 {
   "version": 2,
   "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "style.css", "use": "@vercel/static" },
+    { "src": "javascript/**", "use": "@vercel/static" },
     { "src": "nextjs/package.json", "use": "@vercel/next" },
     { "src": "astro/package.json", "use": "@vercel/static-build", "config": { "distDir": ".vercel/output" } }
   ],

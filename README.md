@@ -36,6 +36,23 @@ rps/
 └── vercel.json     # Vercel deployment configuration
 ```
 
+## Verifying the Root Page Locally
+
+The root `index.html` is a plain static file, so you can verify it is present and renders correctly with any static file server:
+
+```bash
+# From the repo root — serves index.html at http://localhost:5000
+npx serve .
+```
+
+Open <http://localhost:5000> — you should see the language/framework selection page.
+
+> **Note:** `vercel dev` currently fails with this project's configuration due to a
+> compatibility issue between the legacy `@vercel/next` builder and Next.js 15
+> (`Error: The first argument must be of type string or an instance of Buffer … Received undefined`).
+> Use a Vercel [Preview Deployment](https://vercel.com/docs/deployments/preview-deployments)
+> to verify the full routing in a production-equivalent environment.
+
 ## Getting Started
 
 ### Go
