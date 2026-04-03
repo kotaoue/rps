@@ -20,6 +20,7 @@ func main() {
 	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("go: %s %s", r.Method, r.URL.String())
 		rps.HandleGame(w, r, "/style.css", false)
 	})
 

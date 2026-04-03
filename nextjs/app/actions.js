@@ -39,6 +39,7 @@ async function saveSession(session) {
 
 export async function play(formData) {
   const choice = formData.get('choice');
+  console.log(`nextjs: play ${choice}`);
   if (!choice || !Object.prototype.hasOwnProperty.call(CHOICES, choice)) {
     redirect('/');
   }
@@ -65,6 +66,7 @@ export async function play(formData) {
 }
 
 export async function reset() {
+  console.log('nextjs: reset');
   await saveSession({ wins: 0, draws: 0, losses: 0 });
   redirect('/');
 }
