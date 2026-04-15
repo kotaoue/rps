@@ -12,9 +12,9 @@
     { "src": "astro/package.json", "use": "@vercel/static-build", "config": { "distDir": ".vercel/output" } }
   ],
   "routes": [
-    { "handle": "filesystem" },
     { "src": "^/node/?$", "dest": "/api/node" },
     { "src": "^/go/?$", "dest": "/api/go" },
-    { "src": "^/typescript/?$", "dest": "/api/typescript" }
+    { "src": "^/typescript/?$", "dest": "/api/typescript" },
+    { "handle": "filesystem" }
   ]
 }
