@@ -1,11 +1,20 @@
 go/go
-nextjs/.next/
-nextjs/node_modules/
-typescript/node_modules/
-typescript/dist/
-astro/node_modules/
-astro/dist/
-astro/.astro/
-astro/.vercel/
-.vercel
+
+# Node / frontend build artifacts
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+.dist/
+**/dist/
+.astro/
+**/.astro/
+.vercel/
+**/.vercel/
+.vite/
+**/.vite/
+
+# Environment files
+.env
+.env.*
 .env*.local
