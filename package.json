@@ -1,0 +1,11 @@
+{
+  "name": "rps",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit api/typescript.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "typescript": "^5.9.3"
+  }
+}
